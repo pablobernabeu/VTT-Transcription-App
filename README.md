@@ -2,7 +2,7 @@
 
 # VTT Transcription App
 
-**VTT Transcription App** is an open-source, R-based web application that allows the conversion of [Web Video Text Tracks (WebVTT) files](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API) into plain text documents. The VTT files can be uploaded one by one, either in `txt` or `vtt` format. The application quickly removes metadata such as timestamps, and structures the text. Files can be successively uploaded, processed and downloaded (`docx` and `txt`).
+**VTT Transcription App** is an open-source, R-based web application that allows the conversion of subtitle files from the [Web Video Text Tracks (WebVTT) Format](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API) into plain transcriptions. For this purpose, a VTT file is uploaded (with extension `.txt` or `.vtt`). Next, the application quickly removes metadata such as timestamps, and structures the text. Files can be successively uploaded, processed and downloaded (`docx` and `txt`).
 
 Since this application has not been exhaustively tested yet, you may wish to revise the result of the transcription, which is displayed on the website.
 
