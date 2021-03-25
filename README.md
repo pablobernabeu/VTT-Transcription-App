@@ -4,9 +4,9 @@
 
 **VTT Transcription App** is an open-source, R-based web application that allows the conversion of [Web Video Text Tracks Format (WebVTT) files](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API) into plain text documents. The VTT files can be uploaded one by one, either in `txt` or `vtt` format. The application quickly removes metadata such as timestamps, and structures the text. Files can be successively uploaded, processed and downloaded (`docx` and `txt`).
 
-Since this application has not been exhaustively tested yet, you may wish to revise the result of the transcription, displayed on the website.
+Since this application has not been exhaustively tested yet, you may wish to revise the result of the transcription, which is displayed on the website.
 
-## :globe_with_meridians:&nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/VTT-Transcription-App/)
+## :globe_with_meridians:&nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/VTT-Transcription-App/) or [here](https://mybinder.org/v2/gh/pablobernabeu/VTT-Transcription-App/HEAD?filepath=shiny)
 
 The data is only visible to the person who uploads it.
 
