@@ -6,7 +6,7 @@
 
 Since this application has not been exhaustively tested yet, you may wish to revise the result of the transcription, which is displayed on the website.
 
-## :globe_with_meridians:&nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/VTT-Transcription-App/) or [here](https://mybinder.org/v2/gh/pablobernabeu/VTT-Transcription-App/HEAD?filepath=shiny)
+## :globe_with_meridians:&nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/VTT-Transcription-App/) or [here](https://mybinder.org/v2/gh/pablobernabeu/VTT-Transcription-App/HEAD?urlpath=shiny)
 
 The data is only visible to the person who uploads it.
 
