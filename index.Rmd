@@ -165,7 +165,7 @@ Developer: Pablo Bernabeu (Dept. Psychology, Lancaster University). Licence: [Cr
 </div>
 
 
-<h3>Upload (.vtt or .txt)</h3>
+<h3>Upload Web Video Text Tracks (`.vtt` or `.txt` extensions)</h3>
 
 ```{r}
 
@@ -206,7 +206,7 @@ transcript = reactive({
 ```
 
 
-<h3>Download</h3>
+<h3>Download plain transcription</h3>
 
 ```{r}
 
@@ -222,6 +222,13 @@ renderUI({
   }
 })
 
+```
+
+
+<div style='padding-bottom:1px;'></div>
+
+
+```{r}
 
 renderUI({
   if(isTruthy(input$upload)) {
@@ -261,7 +268,7 @@ renderUI({
 
 ```
 
-<span style='padding-bottom:5px;'></span>
+<div style='padding-bottom:1px;'></div>
 
 ```{r}
 
@@ -294,7 +301,10 @@ renderUI({
 ```
 
 
-<h3>Plain transcription</h3>
+<div style='padding-bottom:1px;'></div>
+
+
+<h3>Result</h3>
 
 ```{r}
 
