@@ -11,3 +11,7 @@ Since this application has not been exhaustively tested yet, you may wish to rev
 Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues), and the app can be extended via pull requests.
 
 Developer: Pablo Bernabeu (Dept. Psychology, Lancaster University). Licence: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
+
+## Code details
+
+The core of the application is in the script [VTT-Transcription-App.Rmd](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/VTT-Transcription-App.Rmd). This file uses an additional script--[VTT-Transcription-App_doc_renderer.Rmd](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/VTT-Transcription-App_doc_renderer.Rmd)--to the download of `docx` documents. In turn, the latter file uses a template to format the `docx` documents.
