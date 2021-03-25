@@ -1,5 +1,5 @@
 ---
-title: VTT Transcription
+title: VTT Transcription App
 author: '<a href="https://github.com/pablobernabeu/Experimental-data-simulation/" target="_blank"><button class="button-version">v `r app_version = read.delim("https://raw.githubusercontent.com/pablobernabeu/VTT-Transcription-App/main/version-number", header = FALSE)[1,1]; sprintf("%.1f", app_version)  # Version number can be updated at https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/version_number`</button></a>'
 output:
   flexdashboard::flex_dashboard:
@@ -150,9 +150,13 @@ Column  {style="padding-top:20px; data-width: 100%; margin: 0 auto; max-width: 1
 
 <div style = "background-color: #FEFEFE; padding-top: 35px; padding-left: 60px; padding-right: 60px; font-size: 16px; line-height: 1.6; margin: 0 auto; max-width: 900px;">
 
-**VTT Transcription App** is an open-source, R-based web application that allows the conversion of [Web Video Text Tracks Format (WebVTT) files](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API) into plain text documents. The VTT files can be uploaded one by one, either in 'txt' or 'vtt' format. The application removes metadata such as timestamps, and structures the text. Files can be quickly uploaded, processed and downloaded in succession. The result can be downloaded as 'docx' or 'txt' documents. The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription), where questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues), and the app can be extended via pull requests.
+<img style='padding-right:20px; padding-bottom:12px; ' align="left" width="70" src="https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Royalty-free%20from%20needpix.com.png?raw=true">
 
-Since this application has not been exhaustively tested yet, you may wish to revise the result of the process, which is directly displayed on the website.
+**VTT Transcription App** is an open-source, R-based web application that allows the conversion of [Web Video Text Tracks Format (WebVTT) files](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API) into plain text documents. The VTT files can be uploaded one by one, either in `txt` or `vtt` format. The application quickly removes metadata such as timestamps, and structures the text. Files can be successively uploaded, processed and downloaded (`docx` and `txt`).
+
+Since this application has not been exhaustively tested yet, you may wish to revise the result of the transcription below.
+
+The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription). Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or by emailing the developer (p.bernabeu@lancaster.ac.uk). The app can be extended via pull requests.
 
 The data is only visible to the person who uploads it.
 
