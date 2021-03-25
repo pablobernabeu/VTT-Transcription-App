@@ -10,7 +10,7 @@ Since this application has not been exhaustively tested yet, you may wish to rev
 
 The data is only visible to the person who uploads it.
 
-Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or by emailing the developer (p.bernabeu@lancaster.ac.uk). The app can be extended via pull requests.
+Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to p.bernabeu@lancaster.ac.uk. The app can be extended via pull requests.
 
 Developer: Pablo Bernabeu (Dept. Psychology, Lancaster University). Licence: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
 
