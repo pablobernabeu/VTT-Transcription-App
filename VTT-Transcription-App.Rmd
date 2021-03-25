@@ -1,0 +1,306 @@
+---
+title: VTT Transcription
+author: '<a href="https://github.com/pablobernabeu/Experimental-data-simulation/" target="_blank"><button class="button-version">v `r app_version = read.delim("https://raw.githubusercontent.com/pablobernabeu/VTT-Transcription-App/main/version-number", header = FALSE)[1,1]; sprintf("%.1f", app_version)  # Version number can be updated at https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/version_number`</button></a>'
+output:
+  flexdashboard::flex_dashboard:
+    theme: 'spacelab'
+    orientation: columns
+    vertical_layout: scroll
+    favicon: https://raw.githubusercontent.com/pablobernabeu/VTT-transcription/master/Royalty-free%20from%20needpix.com.png
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+
+# Web application engines
+library(shiny)
+library(flexdashboard)
+
+# Text processing
+library(stringr)
+library(stringi)
+
+# general
+library(dplyr)
+
+```
+
+
+<!-- Adjust website settings -->
+
+<head>
+
+<style type="text/css">
+
+<!-- Fonts format -->
+
+body{ /* Normal  */
+font-size: 16px;
+}
+
+td {  /* Table  */
+font-size: 14px;
+}
+
+h1.title {
+font-size: 38px;
+font-weight: bold;
+color: #28002E
+}
+
+h1 { /* Header 1 */
+font-size: 28px;
+font-weight: bold;
+color: #28002E
+}
+
+h2 { /* Header 2 */
+font-size: 22px;
+font-weight: bold;
+color: #28002E
+}
+
+h3 { /* Header 3 */
+font-size: 18px;
+font-weight: bold;
+}
+
+h4 { /* Header 4 */
+font-size: 16px;
+}
+
+h5 { /* Header 5 */
+font-size: 15px;
+}
+
+h6 { /* Header 6 */
+font-size: 14px;
+}
+
+code.r{ /* Code block */
+font-size: 22px;
+}
+
+/* Input fields */
+.shiny-bound-input {
+font-size: 16px;
+color: #2D5054;
+}
+
+/* Change error messages */
+.shiny-output-error{
+visibility: hidden;
+padding-bottom: 10px;
+}
+
+.shiny-output-error:after{
+content: 'Awaiting inputs or loading.';
+visibility: visible; color: #377277; font-size: 14px;
+padding-bottom: 20px; margin-bottom: 20px;
+}
+
+/* Format buttons */
+
+.button-version {
+background-color: #FCF5F5;
+opacity: 0.2;
+border: none;
+color: black;
+font-weight: bold;
+padding: 0px 4px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 10px;
+margin: 0px 0px;
+cursor: pointer;
+border-radius: 12px;
+}
+
+.button-version:hover {
+opacity: 1;
+}
+
+.transcript-download {
+border: 1px solid black;
+background-color: #F4F9F9;
+color: black;
+padding: 3px 6px;
+cursor: pointer;
+border-color: #E4ECED;
+color: black;
+}
+
+.transcript-download:hover {
+background: #E9F2F2;
+color: black;
+}
+
+</style>
+
+<!-- Load Bootstrap libraries for icons -->
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+
+</head>
+
+
+
+Column  {style="padding-top:20px; data-width: 100%; margin: 0 auto; max-width: 1000px;"}
+-----------------------------------------------------------------------
+
+<div style = "background-color: #FEFEFE; padding-top: 35px; padding-left: 60px; padding-right: 60px; font-size: 16px; line-height: 1.6; margin: 0 auto; max-width: 900px;">
+
+**VTT Transcription App** is an open-source, R-based web application that allows the conversion of [Web Video Text Tracks Format (WebVTT) files](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API) into plain text documents. The VTT files can be uploaded one by one, either in 'txt' or 'vtt' format. The application removes metadata such as timestamps, and structures the text. Files can be quickly uploaded, processed and downloaded in succession. The result can be downloaded as 'docx' or 'txt' documents. The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription), where questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues), and the app can be extended via pull requests.
+
+Since this application has not been exhaustively tested yet, you may wish to revise the result of the process, which is directly displayed on the website.
+
+The data is only visible to the person who uploads it.
+
+<div style='color:grey; font-size:90%;'>
+Developer: Pablo Bernabeu (Dept. Psychology, Lancaster University). Licence: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
+</div>
+
+
+<h3>Upload (.vtt or .txt)</h3>
+
+```{r}
+
+fileInput("upload", NULL, buttonLabel = "Upload...", multiple = FALSE, accept = c(".txt", ".vtt"), width = '500px')
+
+# Process text
+transcript = reactive({
+  
+  transcript = read.delim(input$upload$datapath)
+  
+  # Drop out unnecessary columns
+  transcript = transcript[,1]
+  
+  # Remove top information
+  transcript = str_replace_all(transcript, regex('\\AWEBVTT', multiline = TRUE), '')
+  transcript = str_replace_all(transcript, regex('\\AKind: captions', multiline = TRUE), '')
+  transcript = str_replace_all(transcript, regex('\\ALanguage: en-GB', multiline = TRUE), '')
+  
+  # Remove long serial codes
+  transcript = str_replace_all(transcript, regex('\\A........-....-....-....-............\\z', multiline = TRUE), '')
+  
+  # Remove ordinal numbering of utterances
+  transcript = str_replace_all(transcript, regex('\\A^[:digit:]*$', multiline = TRUE), '')
+  
+  # Remove time stamps
+  transcript = str_replace_all(transcript, regex('\\A..:..:...... --> ..:..:......', multiline = TRUE), '')
+  
+  # Remove empty strings
+  transcript = stri_remove_empty(transcript)
+  
+  # Concatenate lines
+  transcript = str_c(transcript, collapse = ' ')
+  
+  # Return
+  transcript
+})
+
+```
+
+
+<h3>Download</h3>
+
+```{r}
+
+# Enter preferred name
+
+renderUI({
+  if(isTruthy(input$upload)) {
+    textInput('downloaded_file_name', 'Name of the file to be downloaded (without extension)', 
+              # Edit file name to remove extension
+              value = str_replace(input$upload$name, '\\.vtt$|\\.txt$', ''),
+              width = '500px'
+    )
+  }
+})
+
+
+renderUI({
+  if(isTruthy(input$upload)) {
+    
+    # Create the actual downloadLink
+    output$transcript_download_docx_link = renderUI({
+      downloadLink('transcript_download_docx', HTML('<i class="fas fa-file-word fa-lg" aria-hidden="true"></i>&nbsp; Download .docx'),
+                   style = 'border-bottom:none !important; text-decoration: none !important; font-weight: normal !important;', 
+                   class = 'transcript-download')
+    })
+    
+    # Add download handling
+    output$transcript_download_docx = downloadHandler(
+      
+      filename = reactive({
+        paste0(input$downloaded_file_name, '.docx') %>%
+          # Edit file name to remove repeated extension
+          str_replace('\\.docx.docx$', '.docx')
+      }),
+      
+      # Based on: https://shiny.rstudio.com/articles/generating-reports.html
+      content = function(file) {
+        # Copy the report file and the template to a temporary directory before processing it, 
+        # in case there aren't write permissions to the current working dir (which can happen 
+        # when deployed).
+        tempReport <- file.path(tempdir(), c('VTT-Transcription-App_doc_renderer.Rmd', 'VTT-Transcription-App-format-template.docx'))
+        file.copy(c('VTT-Transcription-App_doc_renderer.Rmd', 'VTT-Transcription-App-format-template.docx'), tempReport, overwrite = TRUE)
+        rmarkdown::render('VTT-Transcription-App_doc_renderer.Rmd', output_file = file)
+      }
+    )
+    
+    # Show link
+    uiOutput('transcript_download_docx_link')
+    
+  }
+})
+
+```
+
+<span style='padding-bottom:5px;'></span>
+
+```{r}
+
+renderUI({
+  if(isTruthy(input$upload)) {
+    
+    # Create the actual downloadLink
+    output$transcript_download_txt_link = renderUI({
+      downloadLink('transcript_download_txt', HTML('<i class="fas fa-file-alt fa-lg" aria-hidden="true"></i>&nbsp; Download .txt'),
+                   style = 'border-bottom:none !important; text-decoration: none !important; font-weight: normal !important;', 
+                   class = 'transcript-download')
+    })
+    
+    # Add download handling
+    output$transcript_download_txt = downloadHandler(
+      filename = reactive({
+        paste0(input$downloaded_file_name, '.txt') %>%
+          # Edit file name to remove repeated extension
+          str_replace('\\.txt.txt$', '.txt')
+      }),
+      content = function(file) { cat(transcript(), file = file) }
+    )
+    
+    # Show link
+    uiOutput('transcript_download_txt_link')
+    
+  }
+})
+
+```
+
+
+<h3>Plain transcription</h3>
+
+```{r}
+
+renderText(transcript())
+
+```
+
+
+<br>
+<br>
+<br>
+
+</div>
