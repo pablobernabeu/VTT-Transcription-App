@@ -1,0 +1,14 @@
+---
+title: 
+output: 
+  word_document: 
+    reference_docx: VTT-Transcription-App-format-template.docx
+---
+
+```{r echo = FALSE, results = 'asis'}
+
+# Simply print the processed transcript 
+cat(transcript())
+
+```
+
