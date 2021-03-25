@@ -150,7 +150,7 @@ Column  {style="padding-top:20px; data-width: 100%; margin: 0 auto; max-width: 1
 
 <div style = "background-color: #FEFEFE; padding-top: 35px; padding-left: 60px; padding-right: 60px; font-size: 16px; line-height: 1.6; margin: 0 auto; max-width: 900px;">
 
-<img style='padding-right:20px; padding-bottom:12px; ' align="left" width="70" src="https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Royalty-free%20from%20needpix.com.png?raw=true">
+<img style='padding-right:20px; padding-bottom:12px;' align="left" width="70" src="https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Royalty-free%20from%20needpix.com.png?raw=true">
 
 **VTT Transcription App** is an open-source, R-based web application that allows the conversion of subtitle files from the [Web Video Text Tracks (WebVTT) Format](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API) into plain texts. For this purpose, the VTT file (with extension `.txt` or `.vtt`) is uploaded to the app. Automatically, metadata such as timestamps are removed, and the text is formatted. Files can be successively submitted and downloaded (as `.docx` and `.txt`). As such, this app can serve to make audiovisual content more accessible.
 
