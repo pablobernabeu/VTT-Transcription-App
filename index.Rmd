@@ -156,7 +156,7 @@ Column  {style="padding-top:20px; data-width: 100%; margin: 0 auto; max-width: 1
 
 Since this application has not been exhaustively tested yet, you may wish to revise the result of the transcription below.
 
-The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription). Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or by emailing the developer (p.bernabeu@lancaster.ac.uk). The app can be extended via pull requests.
+The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription). Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to p.bernabeu@lancaster.ac.uk. The app can be extended via pull requests.
 
 The data is only visible to the person who uploads it.
 
