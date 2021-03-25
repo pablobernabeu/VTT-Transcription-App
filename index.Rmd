@@ -214,7 +214,7 @@ transcript = reactive({
 
 renderUI({
   if(isTruthy(input$upload)) {
-    textInput('downloaded_file_name', 'Editable name for the file to be downloaded (without extension)', 
+    textInput('downloaded_file_name', '[Optional] Edit file name (without extension)', 
               # Edit file name to remove extension
               value = str_replace(input$upload$name, '\\.vtt$|\\.txt$', ''),
               width = '500px'
