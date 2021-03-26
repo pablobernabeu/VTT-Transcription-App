@@ -2,7 +2,7 @@
 
 # VTT Transcription App
 
-**VTT Transcription App** is an open-source, R-based web application that allows the conversion of subtitle files from the [Web Video Text Tracks (WebVTT) Format](https://www.w3.org/TR/webvtt1/) into plain texts. For this purpose, users upload a VTT file with extension `.vtt` or `.txt`. Automatically, metadata such as timestamps are removed, and the text is formatted into a paragraph. The result is displayed on the website, and can also be downloaded as `.docx` and `.txt` documents. Overall, this application serves to improve the accessibility of subtitles.
+**VTT Transcription App** is an open-source, R-based web application that allows the conversion of subtitle files from [Web Video Text Tracks (WebVTT) Format](https://www.w3.org/TR/webvtt1/) into plain texts. For this purpose, users upload a VTT file with extension `.vtt` or `.txt`. Automatically, metadata such as timestamps are removed, and the text is formatted into a paragraph. The result is displayed on the website, and can also be downloaded as `.docx` and `.txt` documents. Overall, this application serves to improve the accessibility of subtitles.
 
 ## :globe_with_meridians:&nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/VTT-Transcription-App/) or [here](https://mybinder.org/v2/gh/pablobernabeu/VTT-Transcription-App/HEAD?urlpath=shiny)
 
