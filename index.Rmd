@@ -208,7 +208,7 @@ renderUI({
               value = str_replace(input$upload$name, '\\.vtt$|\\.txt$', ''),
               width = '500px'
     )
-  }
+  } else print('Upon the upload, the transcription and the download options will be displayed here.')
 })
 
 ```
