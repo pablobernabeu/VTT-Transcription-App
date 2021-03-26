@@ -6,7 +6,7 @@
 
 ## :globe_with_meridians:&nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/VTT-Transcription-App/) or [here](https://mybinder.org/v2/gh/pablobernabeu/VTT-Transcription-App/HEAD?urlpath=shiny)
 
-The data is only visible to the person who uploads it.
+The data is only available to the user, and is deleted when the website is closed.
 
 Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to p.bernabeu@lancaster.ac.uk. The app can be extended via pull requests.
 
