@@ -93,10 +93,7 @@ visibility: hidden;
 padding-bottom: 10px;
 }
 
-.shiny-output-error:after{
-content: 'Awaiting inputs or loading.';
-visibility: visible; color: #377277; font-size: 14px;
-padding-bottom: 20px; margin-bottom: 20px;
+.shiny-output-error:hidden{
 }
 
 /* Format buttons */
@@ -152,61 +149,53 @@ Column  {style="padding-top:20px; data-width: 100%; margin: 0 auto; max-width: 1
 
 <img style='padding-right:20px; padding-bottom:12px;' align="left" width="70" src="https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Royalty-free%20from%20needpix.com.png?raw=true">
 
-**VTT Transcription App** is an open-source, R-based web application that allows the conversion of subtitle files from the [Web Video Text Tracks (WebVTT) Format](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API) into plain texts. For this purpose, the VTT file (with extension `.txt` or `.vtt`) is uploaded to the app. Automatically, metadata such as timestamps are removed, and the text is formatted. Files can be successively submitted and downloaded (as `.docx` and `.txt`). As such, this app can serve to make audiovisual content more accessible.
-
-Since this application has not been exhaustively tested yet, you may wish to revise the result of the transcription below.
-
-The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription). Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to p.bernabeu@lancaster.ac.uk. The app can be extended via pull requests.
+**VTT Transcription App** is an open-source, R-based web application that allows the conversion of subtitle files from [Web Video Text Tracks (WebVTT) Format](https://www.w3.org/TR/webvtt1/) into plain texts. For this purpose, users upload a VTT file with extension `.vtt` or `.txt`. Automatically, metadata such as timestamps are removed, and the text is formatted into a paragraph. The result is displayed below, and can be downloaded as `.docx` and `.txt` documents. Overall, this application serves to improve the accessibility of subtitles.
 
 The data is only visible to the person who uploads it.
 
-<div style='color:grey; font-size:90%;'>
-Developer: Pablo Bernabeu (Dept. Psychology, Lancaster University). Licence: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
-</div>
 
-
-<h3>Upload Web Video Text Tracks (`.vtt` or `.txt` extensions)</h3>
+<h3>Upload WebVTT file with `.vtt` or `.txt` extension</h3>
 
 ```{r}
 
-fileInput("upload", NULL, buttonLabel = "Upload...", multiple = FALSE, accept = c(".txt", ".vtt"), width = '500px')
+fileInput("upload", NULL, buttonLabel = "Upload", multiple = FALSE, accept = c(".vtt", ".txt"), width = '500px')
 
 # Process text
 transcript = reactive({
   
-  transcript = read.delim(input$upload$datapath)
+  df = read.delim(input$upload$datapath)
   
-  # Drop out unnecessary columns
-  transcript = transcript[,1]
+  # Select the first and only column
+  df = df[,1]
   
-  # Remove top information
-  transcript = str_replace_all(transcript, regex('\\AWEBVTT', multiline = TRUE), '')
-  transcript = str_replace_all(transcript, regex('\\AKind: captions', multiline = TRUE), '')
-  transcript = str_replace_all(transcript, regex('\\ALanguage: en-GB', multiline = TRUE), '')
+  # Remove upper information
+  df = str_replace_all(df, '^WEBVTT$', '')
+  df = str_replace_all(df, '^Kind: captions$', '')
+  df = str_replace_all(df, '^Language: [[:alpha:]]*-[[:alpha:]]*$', '')
   
   # Remove long serial codes
-  transcript = str_replace_all(transcript, regex('\\A........-....-....-....-............\\z', multiline = TRUE), '')
+  df = str_replace_all(df, '^[[:alnum:]]*-[[:alnum:]]*-[[:alnum:]]*-[[:alnum:]]*-[[:alnum:]]*$', '')
   
-  # Remove ordinal numbering of utterances
-  transcript = str_replace_all(transcript, regex('\\A^[:digit:]*$', multiline = TRUE), '')
+  # Remove ordinal numbering of utterances (single numbers in lines)
+  df = str_replace_all(df, '^\\d*$', '')
   
-  # Remove time stamps
-  transcript = str_replace_all(transcript, regex('\\A..:..:...... --> ..:..:......', multiline = TRUE), '')
+  # Remove timestamps in both formats (dot or comma at the end)
+  df = str_replace_all(df, '^\\d\\d:\\d\\d:\\d\\d\\.\\d\\d\\d --> \\d\\d:\\d\\d:\\d\\d\\.\\d\\d\\d$', '')
+  df = str_replace_all(df, '^\\d\\d:\\d\\d:\\d\\d,\\d\\d\\d --> \\d\\d:\\d\\d:\\d\\d,\\d\\d\\d$', '')
   
   # Remove empty strings
-  transcript = stri_remove_empty(transcript)
+  df = stri_remove_empty(df)
   
   # Concatenate lines
-  transcript = str_c(transcript, collapse = ' ')
+  df = str_c(df, collapse = ' ')
   
-  # Return
-  transcript
+  # Return object
+  df
+  
 })
 
 ```
 
-
-<h3>Download plain transcription</h3>
 
 ```{r}
 
@@ -214,7 +203,7 @@ transcript = reactive({
 
 renderUI({
   if(isTruthy(input$upload)) {
-    textInput('downloaded_file_name', '[Optional] Edit file name (omitting extension)', 
+    textInput('downloaded_file_name', 'Editable download name (extension omitted)',
               # Edit file name to remove extension
               value = str_replace(input$upload$name, '\\.vtt$|\\.txt$', ''),
               width = '500px'
@@ -224,9 +213,7 @@ renderUI({
 
 ```
 
-
 <div style='padding-bottom:1px;'></div>
-
 
 ```{r}
 
@@ -300,11 +287,9 @@ renderUI({
 
 ```
 
+<div style='padding-bottom:10px;'></div>
 
-<div style='padding-bottom:1px;'></div>
-
-
-<h3>Result</h3>
+<div style='border-left-style: solid; border-left-color: darkgreen; padding-left: 20px;'>
 
 ```{r}
 
@@ -312,8 +297,17 @@ renderText(transcript())
 
 ```
 
+</div>
 
 <br>
+<br>
+
+The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription). Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to p.bernabeu@lancaster.ac.uk. The app can be extended via pull requests.
+
+<div style='color:grey; font-size:90%;'>
+Developer: Pablo Bernabeu (Dept. Psychology, Lancaster University). Licence: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
+</div>
+
 <br>
 <br>
 
