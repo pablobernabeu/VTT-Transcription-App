@@ -149,7 +149,7 @@ Column  {style="padding-top:20px; data-width: 100%; margin: 0 auto; max-width: 1
 
 <img style='padding-right:20px; padding-bottom:12px;' align="left" width="70" src="https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Royalty-free%20from%20needpix.com.png?raw=true">
 
-**VTT Transcription App** is an open-source, R-based web application that allows the conversion of subtitle files from [Web Video Text Tracks (WebVTT) Format](https://www.w3.org/TR/webvtt1/) into plain texts. For this purpose, users upload a VTT file with the extension `.vtt` or `.txt`. Automatically, metadata such as timestamps are removed, and the text is formatted into a paragraph. The result is displayed below, and can be downloaded as `.docx` and `.txt` documents. Overall, this application serves to improve the accessibility of subtitles.
+This is an open-source, R-based web application that allows the conversion of video captions, or subtitles, from the [Web Video Text Tracks (WebVTT) Format](https://www.w3.org/TR/webvtt1/) into plain texts. For this purpose, users upload a WebVTT file with the extension `.vtt` or `.txt` (examples available [here](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Example_subtitles_1.vtt) and [here](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Example_subtitles_2.txt)). Automatically, metadata such as timestamps are removed, and the text is formatted into a paragraph. The result is displayed below, and can be downloaded as `.docx` and `.txt` documents. Overall, this application serves to improve the accessibility of video captions.
 
 The data is only available to the user, and is deleted when the website is closed.
 
