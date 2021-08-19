@@ -1,4 +1,4 @@
-<img align="left" width="50" height="50" src="https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Royalty-free%20from%20needpix.com.png">
+<img align="left" width="50" height="50" src="https://github.com/pablobernabeu/VTT-Transcription-App/raw/main/Royalty-free%20from%20needpix.com.png">
 
 # WebVTT caption transcription app
 
