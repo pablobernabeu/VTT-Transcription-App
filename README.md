@@ -4,7 +4,7 @@
 
 This open-source, R-based web application allows the conversion of video captions (subtitles) from the [Web Video Text Tracks (WebVTT) Format](https://www.w3.org/TR/webvtt1/) into plain texts. For this purpose, users upload a WebVTT file with the extension `.vtt` or `.txt` (examples available [here](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Example_subtitles_1.vtt) and [here](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Example_subtitles_2.txt)). Automatically, metadata such as timestamps are removed, and the text is formatted into a paragraph. The result is displayed on the website, and can be downloaded as `.docx` and `.txt` documents. Overall, this application serves to improve the accessibility of video captions.
 
-## :globe_with_meridians:&nbsp; The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/VTT-Transcription-App/) or [here](https://mybinder.org/v2/gh/pablobernabeu/VTT-Transcription-App/HEAD?urlpath=shiny)
+## The web application can be [launched here](https://pablo-bernabeu.shinyapps.io/VTT-Transcription-App/) or [here](https://mybinder.org/v2/gh/pablobernabeu/VTT-Transcription-App/HEAD?urlpath=shiny).
 
 The data is only available to the user, and is deleted when the website is closed.
 
