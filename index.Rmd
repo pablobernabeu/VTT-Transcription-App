@@ -302,7 +302,7 @@ renderText(transcript())
 <br>
 <br>
 
-The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription). Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to p.bernabeu@lancaster.ac.uk. The app can be extended via pull requests.
+The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription). Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to pcbernabeu@gmail.com. The app can be extended via pull requests.
 
 <div style='color:grey; font-size:90%;'>
 Developer: Pablo Bernabeu (Dept. Psychology, Lancaster University). Licence: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
