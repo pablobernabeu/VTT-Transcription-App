@@ -8,7 +8,7 @@ This open-source, R-based web application allows the conversion of video caption
 
 The data is only available to the user, and is deleted when the website is closed.
 
-Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to p.bernabeu@lancaster.ac.uk. The app can be extended via pull requests.
+Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to pcbernabeu@gmail.com. The app can be extended via pull requests.
 
 Developer: Pablo Bernabeu (Dept. Psychology, Lancaster University). Licence: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
 
