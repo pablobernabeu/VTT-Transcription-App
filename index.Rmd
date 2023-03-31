@@ -1,6 +1,6 @@
 ---
 title: WebVTT caption transcription app
-author: '<a href="https://github.com/pablobernabeu/Experimental-data-simulation/" target="_blank"><button class="button-version">v `r app_version = read.delim("https://raw.githubusercontent.com/pablobernabeu/VTT-Transcription-App/main/version-number", header = FALSE)[1,1]; sprintf("%.1f", app_version)  # Version number can be updated at https://github.com/pablobernabeu/Experimental-data-simulation/blob/master/version_number`</button></a>'
+author: '<a href="https://github.com/pablobernabeu/VTT-Transcription-App/" target="_blank"><button class="button-version">v `r app_version = read.delim("https://raw.githubusercontent.com/pablobernabeu/VTT-Transcription-App/main/version-number", header = FALSE)[1,1]; sprintf("%.1f", app_version)  # Version number can be updated at https://github.com/pablobernabeu/VTT-Transcription-App/blob/master/version_number`</button></a>'
 output:
   flexdashboard::flex_dashboard:
     theme: 'spacelab'
