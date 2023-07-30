@@ -1,12 +1,12 @@
 ---
 title: WebVTT caption transcription app
-author: '<a href="https://github.com/pablobernabeu/VTT-Transcription-App/" target="_blank"><button class="button-version">v `r app_version = read.delim("https://raw.githubusercontent.com/pablobernabeu/VTT-Transcription-App/main/version-number", header = FALSE)[1,1]; sprintf("%.1f", app_version)  # Version number can be updated at https://github.com/pablobernabeu/VTT-Transcription-App/blob/master/version_number`</button></a>'
+author: '<a href="https://github.com/pablobernabeu/VTT-Transcription-App/" target="_blank"><button class="button-version">v `r app_version = read.delim("assets/version_number.txt", header = FALSE)[1,1]; sprintf("%.1f", app_version)  # Version number can be updated in "assets/version_number.txt"`</button></a>'
 output:
   flexdashboard::flex_dashboard:
     theme: 'spacelab'
     orientation: columns
     vertical_layout: scroll
-    favicon: https://raw.githubusercontent.com/pablobernabeu/VTT-transcription/master/Royalty-free%20from%20needpix.com.png
+    favicon: 'assets/Royalty-free from needpix.com.png'
 runtime: shiny
 ---
 
@@ -145,11 +145,11 @@ color: black;
 Column  {style="padding-top:20px; data-width: 100%; margin: 0 auto; max-width: 1000px;"}
 -----------------------------------------------------------------------
 
-<div style = "background-color: #FEFEFE; padding-top: 35px; padding-left: 60px; padding-right: 60px; font-size: 16px; line-height: 1.6; margin: 0 auto; max-width: 900px;">
+<div style = "background-color: #FEFEFE; padding-top: 35px; padding-left: 60px; padding-right: 60px; font-size: 18px; line-height: 2; margin: 0 auto; max-width: 900px;">
 
-<img style='padding-right:20px; padding-bottom:12px;' align="left" width="70" src="https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Royalty-free%20from%20needpix.com.png?raw=true">
+<img style='padding-right:20px; padding-bottom:12px;' align="left" width="70" src="assets/Royalty-free from needpix.com.png">
 
-This open-source, R-based web application allows the conversion of video captions (subtitles) from the [Web Video Text Tracks (WebVTT) Format](https://www.w3.org/TR/webvtt1/) into plain texts. For this purpose, users upload a WebVTT file with the extension `.vtt` or `.txt` (examples available [here](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Example_subtitles_1.vtt) and [here](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/Example_subtitles_2.txt)). Automatically, metadata such as timestamps are removed, and the text is formatted into a paragraph. The result is displayed below, and can be downloaded as `.docx` and `.txt` documents. Overall, this application serves to improve the accessibility of video captions.
+This open-source, R-based web application allows the conversion of video captions (subtitles) from the [Web Video Text Tracks (WebVTT) Format](https://www.w3.org/TR/webvtt1/) into plain texts. For this purpose, users upload a WebVTT file with the extension `.vtt` or `.txt` (examples available [here](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/assets/Example_subtitles_1.vtt) and [here](https://github.com/pablobernabeu/VTT-Transcription-App/blob/main/assets/Example_subtitles_2.txt)). Automatically, metadata such as timestamps are removed, and the text is formatted into a paragraph. The result is displayed below, and can be downloaded as `.docx` and `.txt` documents. Overall, this application serves to improve the accessibility of video captions.
 
 The data is only available to the user, and is deleted when the website is closed.
 
@@ -158,7 +158,8 @@ The data is only available to the user, and is deleted when the website is close
 
 ```{r}
 
-fileInput("upload", NULL, buttonLabel = "Upload", multiple = FALSE, accept = c(".vtt", ".txt"), width = '500px')
+fileInput("upload", NULL, buttonLabel = "Upload", multiple = FALSE, 
+          accept = c(".vtt", ".txt"), width = '500px')
 
 # Process text
 transcript = reactive({
@@ -197,23 +198,29 @@ transcript = reactive({
 ```
 
 
+
+<h2>Transcript</h2>
+
+
 ```{r}
 
 # Enter preferred name
 
 renderUI({
   if(isTruthy(input$upload)) {
-    textInput('downloaded_file_name', 'Editable download name (extension omitted)',
+    textInput('downloaded_file_name', 
+              'Editable name of the file to be downloaded',
               # Edit file name to remove extension
-              value = str_replace(input$upload$name, '\\.vtt$|\\.txt$', ''),
+              value = paste('transcript --', 
+                            str_replace(input$upload$name, '\\.vtt$|\\.txt$', '')),
               width = '500px'
     )
-  } else print('Upon the upload, the transcription and the download options will be displayed here.')
+  } else print('After the upload, the transcription and the download options will be displayed below.')
 })
 
 ```
 
-<div style='padding-bottom:1px;'></div>
+<div style='padding-bottom:7px;'></div>
 
 ```{r}
 
@@ -222,7 +229,8 @@ renderUI({
     
     # Create the actual downloadLink
     output$transcript_download_docx_link = renderUI({
-      downloadLink('transcript_download_docx', HTML('<i class="fas fa-file-word fa-lg" aria-hidden="true"></i>&nbsp; Download .docx'),
+      downloadLink('transcript_download_docx', 
+                   HTML('<i class="fas fa-file-word fa-lg" aria-hidden="true"></i>&nbsp; Download .docx'),
                    style = 'border-bottom:none !important; text-decoration: none !important; font-weight: normal !important;', 
                    class = 'transcript-download')
     })
@@ -241,9 +249,12 @@ renderUI({
         # Copy the report file and the template to a temporary directory before processing it, 
         # in case there aren't write permissions to the current working dir (which can happen 
         # when deployed).
-        tempReport <- file.path(tempdir(), c('VTT-Transcription-App_doc_renderer.Rmd', 'VTT-Transcription-App-format-template.docx'))
-        file.copy(c('VTT-Transcription-App_doc_renderer.Rmd', 'VTT-Transcription-App-format-template.docx'), tempReport, overwrite = TRUE)
-        rmarkdown::render('VTT-Transcription-App_doc_renderer.Rmd', output_file = file)
+        tempReport <- file.path(tempdir(), c('assets/VTT-Transcription-App_doc_renderer.Rmd', 
+                                             'assets/VTT-Transcription-App-format-template.docx'))
+        file.copy(c('assets/VTT-Transcription-App_doc_renderer.Rmd', 
+                    'assets/VTT-Transcription-App-format-template.docx'), 
+                  tempReport, overwrite = TRUE)
+        rmarkdown::render('assets/VTT-Transcription-App_doc_renderer.Rmd', output_file = file)
       }
     )
     
@@ -255,7 +266,7 @@ renderUI({
 
 ```
 
-<div style='padding-bottom:1px;'></div>
+<div style='padding-bottom:7px;'></div>
 
 ```{r}
 
@@ -264,7 +275,8 @@ renderUI({
     
     # Create the actual downloadLink
     output$transcript_download_txt_link = renderUI({
-      downloadLink('transcript_download_txt', HTML('<i class="fas fa-file-alt fa-lg" aria-hidden="true"></i>&nbsp; Download .txt'),
+      downloadLink('transcript_download_txt', 
+                   HTML('<i class="fas fa-file-alt fa-lg" aria-hidden="true"></i>&nbsp; Download .txt'),
                    style = 'border-bottom:none !important; text-decoration: none !important; font-weight: normal !important;', 
                    class = 'transcript-download')
     })
@@ -287,7 +299,7 @@ renderUI({
 
 ```
 
-<div style='padding-bottom:10px;'></div>
+<div style='padding-bottom:20px;'></div>
 
 <div style='border-left-style: solid; border-left-color: darkgreen; padding-left: 20px;'>
 
@@ -300,12 +312,12 @@ renderText(transcript())
 </div>
 
 <br>
-<br>
+<hr>
 
-The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription). Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to pcbernabeu@gmail.com. The app can be extended via pull requests.
+The [source code is available on Github](https://github.com/pablobernabeu/VTT-transcription), where the app can be extended via pull requests. Questions and suggestions can be submitted as [issues](https://github.com/pablobernabeu/VTT-transcription/issues) or emailed to pcbernabeu@gmail.com. 
 
 <div style='color:grey; font-size:90%;'>
-Developer: Pablo Bernabeu (Dept. Psychology, Lancaster University). Licence: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
+Developer: [Pablo Bernabeu](https://github.com/pablobernabeu). Licence: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
 </div>
 
 <br>

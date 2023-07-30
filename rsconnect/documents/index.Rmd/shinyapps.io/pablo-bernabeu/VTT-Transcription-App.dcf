@@ -1,0 +1,14 @@
+name: VTT-Transcription-App
+title: VTT-Transcription-App
+username:
+account: pablo-bernabeu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3850928
+bundleId: 7512322
+url: https://pablo-bernabeu.shinyapps.io/VTT-Transcription-App/
+when: 1690746289.71575
+lastSyncTime: 1690746289.71576
+asMultiple: FALSE
+asStatic: FALSE
+additionalFiles: assets/version_number.txt
