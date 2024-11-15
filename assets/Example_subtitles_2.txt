@@ -8,7 +8,7 @@ Sed lorem diam, fermentum id hendrerit eu, efficitur at nulla. Aenean vitae
 
 3
 00:00:15,898 --> 00:00:21,898
-pulvinar magna. Pellentesque metus nisi, elementum a nisi a, mattis fermentum
+pulvinar magna. Pellentesque metus nisi, elementum nisi, mattis fermentum
 
 4
 00:00:21,898 --> 00:00:26,898
