@@ -7,8 +7,12 @@ output:
 
 ```{r echo = FALSE, results = 'asis'}
 
-# Simply print the processed transcript 
-cat(transcript())
+# Print the processed transcript. Tabs and ASCII punctuation marks are written
+# as numeric character references (e.g., '&#34;' for '"') so that Pandoc
+# prints the text as it is, instead of reading characters such as '*', '#' or
+# '[' as Markdown or making straight quotes curly.
+codes = utf8ToInt(transcript())
+escape = codes %in% c(9, 33:47, 58:64, 91:96, 123:126)
+cat(ifelse(escape, sprintf('&#%d;', codes), intToUtf8(codes, multiple = TRUE)), sep = '')
 
 ```
-
